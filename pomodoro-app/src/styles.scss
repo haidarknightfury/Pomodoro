@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+.form-input {
+    width: 100%;
+    margin-bottom: 1rem;
+    label,
+    input {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin-bottom: 2px;
+    }
+    label {
+        font-weight: bold;
+        font-size: 1rem;
+        color: gray;
+    }
+    input {
+        font-size: 1rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid rgb(189, 185, 185);
+    }
+    input[type=text]:focus,
+    input[type=password]:focus {
+        border: 1px solid rgb(189, 185, 185);
+    }
+}
+
+.form-button {
+    width: 100%;
+    padding: 0.5 rem;
+    height: 2.2rem;
+    border-radius: 5px;
+    &.primary {
+        background-color: #101727;
+        color: white;
+    }
+    &:hover {
+        background-color: #666a74;
+        color: white;
+        cursor: pointer;
+    }
+}
