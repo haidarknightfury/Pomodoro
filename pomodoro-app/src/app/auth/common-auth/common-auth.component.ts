@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-common-auth',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class CommonAuthComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  src: string = '';
 
   ngOnInit(): void {
   }

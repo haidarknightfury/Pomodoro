@@ -1,4 +1,22 @@
 :host {
-    height: 70%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading {
+    display: flex;
+    width: 100%;
+}
+
+.link {
+    color: darkgray;
+    a {
+        font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }

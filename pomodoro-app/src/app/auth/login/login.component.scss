@@ -6,47 +6,17 @@
     justify-content: center;
 }
 
-.login {
-    height: 70%;
-    width: 60%;
+.heading {
     display: flex;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 5px;
-    box-shadow: 12px 12px 2px 1px rgba(177, 177, 177, 0.2);
-    .illustration {
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        border-right: 1px solid lightgray;
-        img {
-            width: 70%;
-        }
-    }
-    .form-container {
-        width: 50%;
-        .form {
-            padding-left: 20%;
-            padding-right: 20%;
-            padding-top: 10%;
-            .login-input {
-                width: 100%;
-            }
-            .heading {
-                display: flex;
-                width: 100%;
-            }
-            .link {
-                color: darkgray;
-                a {
-                    font-weight: bold;
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+    width: 100%;
+}
+
+.link {
+    color: darkgray;
+    a {
+        font-weight: bold;
+        &:hover {
+            cursor: pointer;
         }
     }
 }

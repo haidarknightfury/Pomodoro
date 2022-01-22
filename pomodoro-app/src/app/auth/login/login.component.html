@@ -1,25 +1,17 @@
-<div class="login">
-    <div class="illustration">
-        <img src="assets/images/signin.svg" alt="illustration-login" />
+<app-common-auth src='assets/images/signin.svg'>
+    <h1 class="heading">Please enter your login details to continue</h1>
+
+    <div class="form-input login-input">
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter your username" name="username">
     </div>
 
-    <div class="form-container">
-        <div class="form">
-            <h1 class="heading">Please enter your login details to continue</h1>
-
-            <div class="form-input login-input">
-                <label for="username">Username</label>
-                <input type="text" placeholder="Enter your username" name="username">
-            </div>
-
-            <div class="form-input login-input">
-                <label for="password">Password</label>
-                <input type="password" placeholder="Enter your password" name="username">
-            </div>
-
-            <button class="form-button primary">Sign in</button>
-
-            <p class="link">Don't have an account? <a>Sign up for free</a></p>
-        </div>
+    <div class="form-input login-input">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter your password" name="username">
     </div>
-</div>
+
+    <button class="form-button primary" (click)="login()">Sign in</button>
+
+    <p class="link">Don't have an account? <a (click)="register()">Sign up for free</a></p>
+</app-common-auth>
