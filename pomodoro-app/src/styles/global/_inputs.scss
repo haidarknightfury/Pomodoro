@@ -25,8 +25,7 @@
     }
 }
 
-.form-button {
-    width: 100%;
+@mixin btn {
     padding: 0.5 rem;
     height: 2.2rem;
     border-radius: 5px;
@@ -34,9 +33,17 @@
         background-color: #101727;
         color: white;
     }
+    &.secondary {
+        background-color: #2d3a58;
+        color: white;
+    }
     &:hover {
         background-color: #666a74;
         color: white;
         cursor: pointer;
     }
+}
+
+.form-button {
+    @include btn;
 }

@@ -1,0 +1,64 @@
+@import "cards";
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+.previous,
+.next {
+    width: 10%;
+    background: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid darkgray;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.previous:hover,
+.next:hover {
+    cursor: pointer;
+}
+
+.pomodoro-timer {
+    @include card-item;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.timer {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.action-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    .form-button {
+        width: 20%;
+        min-height: 20px;
+    }
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.start-stop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .form-button {
+        width: 40%;
+    }
+}

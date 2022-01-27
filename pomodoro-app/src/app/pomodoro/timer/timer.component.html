@@ -1,0 +1,18 @@
+<div class="pomodoro-timer">
+    <div class="previous">&lt; &lt;</div>
+    <div class="timer">
+        <div class="action-buttons">
+            <button class="form-button primary">Pomodoro</button>
+            <button class="form-button primary">Short break</button>
+            <button class="form-button primary">Long Break</button>
+        </div>
+
+        <div class="time">{{ currentTime }}</div>
+        <div class="start-stop">
+            <button class="form-button primary" *ngIf="!timer.hasStarted()" (click)="startTimer()"> Start</button>
+            <button class="form-button primary" *ngIf="timer.hasStarted()" (click)="timer.stop()">Stop</button>
+        </div>
+
+    </div>
+    <div class="next">&gt; &gt;</div>
+</div>

@@ -1,7 +1,11 @@
-.card-layout {
+@mixin card-item {
     border-radius: 4px;
     border: 1px solid #eee;
     background-color: #fafafa;
+}
+
+.card-layout {
+    @include card-item;
     display: flex;
     flex-direction: row;
     justify-content: center;
