@@ -2,3 +2,51 @@
     width: 100%;
     height: 100%;
 }
+
+.section {
+    scrollbar-color: #d4aa70 #e4e4e4;
+    transition: scrollbar-color 0.3s ease-out;
+}
+
+.section:hover {
+    scrollbar-color: #5749d2;
+}
+
+.task {
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+    .task-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: space-around;
+        flex-grow: 0.8;
+    }
+    .new-task {
+        cursor: pointer;
+        display: flex;
+        background: lightgrey;
+        color: black;
+        font-weight: bold;
+        justify-content: center;
+        border: 2px dotted darkgray;
+        padding: 10px;
+        margin-top: 5px;
+        &:hover {
+            position: relative;
+            left: 1px;
+            top: 1px;
+        }
+    }
+}

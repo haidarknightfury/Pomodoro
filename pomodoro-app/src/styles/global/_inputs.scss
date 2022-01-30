@@ -42,6 +42,9 @@
         color: white;
         cursor: pointer;
     }
+    &.active {
+        text-decoration: underline double white
+    }
 }
 
 .form-button {

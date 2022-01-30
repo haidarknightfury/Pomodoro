@@ -1,3 +1,11 @@
-.w-100 {
-    width: 100%;
+$widthValues: ( 25: 25%, 50: 50%, 75: 75%, 100: 100%);
+@mixin width-modifiers {
+    @each $width,
+    $percent in $widthValues {
+        .w-#{$width} {
+            width: $percent;
+        }
+    }
 }
+
+@include width-modifiers;
