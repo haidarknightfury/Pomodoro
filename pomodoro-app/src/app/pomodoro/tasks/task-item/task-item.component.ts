@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Task } from 'src/app/core/model/task.model';
 
@@ -17,6 +17,9 @@ export class TaskItemComponent implements OnInit {
   @Input()
   index: number = 0;
 
+  @Output()
+  taskUpdated: EventEmitter<Task> = new EventEmitter();
+
   showMore: boolean;
 
 
@@ -33,9 +36,9 @@ export class TaskItemComponent implements OnInit {
   }
 
   save() {
-    this.task.title = this.titleFormControl.value;
-    this.task.note = this.noteFormControl.value;
+    const updatedTask = new Task(this.titleFormControl.value, this.noteFormControl.value);
     this.showMore = !this.showMore;
+    this.taskUpdated.emit(updatedTask);
   }
 
   delete(){

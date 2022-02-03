@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {Task} from  '../../core/model/task.model';
-
+import { Store } from '@ngrx/store';
+import { Task } from '../../core/model/task.model';
+import * as taskOperations from '../store/pomodoro.action';
+import {TaskService} from '../../core/service/task.service';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -9,18 +11,23 @@ import {Task} from  '../../core/model/task.model';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<{ taskList: { tasks: Task[] } }>,
+              private taskService: TaskService) { }
 
   taskItems = [new Task('Fist task', '')];
 
- 
-
   ngOnInit(): void {
+    this.store.select('taskList').subscribe((res) => {
+        this.taskItems = res.tasks;
+    });
   }
 
   addNewTask() {
-    console.log('adding new tasks');
-    this.taskItems.push(new Task('More task', ''));
+    this.store.dispatch(new taskOperations.AddTask(new Task('New task','')));
+  }
+
+  taskUpdated(task:Task, index: number){
+    this.store.dispatch(new taskOperations.UpdateTask({index, task}));
   }
 
 }

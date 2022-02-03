@@ -4,6 +4,11 @@
     width: 95%;
     border: 2px solid darkgray;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    &.active {
+        border-left: 5px solid black;
+    }
 }
 
 .task-item {

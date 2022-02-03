@@ -1,15 +1,6 @@
 export class Task {
-
-    title: string;
-    note: string;
-    estPomodoro: number;
-    projects: string[];
+    id: any;
     completed = false;
-
-    constructor(title: string, note: string, estPomodoro: number = 1, projects?: string[]){
-        this.title = title;
-        this.note = note;
-        this.estPomodoro = estPomodoro;
-        this.projects = projects;
+    constructor(public title: string, public note: string, public estPomodoro: number = 1,public projects?: string[]){
     }
 }
