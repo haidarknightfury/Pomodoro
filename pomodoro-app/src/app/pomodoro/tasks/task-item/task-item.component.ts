@@ -20,8 +20,10 @@ export class TaskItemComponent implements OnInit {
   @Output()
   taskUpdated: EventEmitter<Task> = new EventEmitter();
 
-  showMore: boolean;
+  @Output()
+  taskDeleted: EventEmitter<Task> = new EventEmitter();
 
+  showMore: boolean;
 
   titleFormControl = new FormControl();
   noteFormControl = new FormControl();
@@ -37,12 +39,16 @@ export class TaskItemComponent implements OnInit {
 
   save() {
     const updatedTask = new Task(this.titleFormControl.value, this.noteFormControl.value);
+    updatedTask.id = this.task.id;
+    updatedTask.completed = this.task.completed;
+    updatedTask.estPomodoro = this.task.estPomodoro;
     this.showMore = !this.showMore;
     this.taskUpdated.emit(updatedTask);
   }
 
   delete(){
     this.showMore = !this.showMore;
+    this.taskDeleted.emit(this.task);
   }
 
   cancel(){

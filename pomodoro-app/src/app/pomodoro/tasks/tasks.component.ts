@@ -17,17 +17,33 @@ export class TasksComponent implements OnInit {
   taskItems = [new Task('Fist task', '')];
 
   ngOnInit(): void {
-    this.store.select('taskList').subscribe((res) => {
-        this.taskItems = res.tasks;
+    this.taskService.getAllTasks().subscribe((res)=> {
+        this.store.dispatch(new taskOperations.LoadTask(res));
+    });
+
+    this.store.select('taskList').subscribe((res)=> {
+      this.taskItems = res.tasks;
+      console.log('all tasks', res.tasks);
     });
   }
 
   addNewTask() {
-    this.store.dispatch(new taskOperations.AddTask(new Task('New task','')));
+    const task = new Task('New task','');
+    this.taskService.saveTasks(task).subscribe((res)=> {
+      this.store.dispatch(new taskOperations.AddTask({...task, id: res}));
+    });
   }
 
   taskUpdated(task:Task, index: number){
-    this.store.dispatch(new taskOperations.UpdateTask({index, task}));
+    this.taskService.updateTask(task).subscribe((res)=>{
+      this.store.dispatch(new taskOperations.UpdateTask({index, task}));
+    })
+  }
+
+  taskDeleted(task:Task, index:number){
+    this.taskService.deleteTask(task).subscribe((res)=>{
+        this.store.dispatch(new taskOperations.DeleteTask(index));
+    });
   }
 
 }
