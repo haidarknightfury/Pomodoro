@@ -5,11 +5,15 @@ export class Timer {
     private interval: number;
     private callback: any;
     private timerInterval: any = null;
+    private timeInMinutes;
 
-    constructor(timeInMs: number, interval = 1000, callback: (...args: any[]) => void){
+    constructor(timeInMs: number, interval = 1000,
+                callback: (...args: any[]) => void, 
+                private completedCallback?:(...args:any[]) => void){
         this.timeInMs = timeInMs;
         this.interval = interval;
         this.callback = callback;
+        this.timeInMinutes = timeInMs / (60*1000);
     }
 
     hasStarted () {
@@ -27,8 +31,9 @@ export class Timer {
     stop() {
         clearInterval(this?.timerInterval);
         this.timerInterval = null;
-        this.timeInMs = 25* 60 * 1000; // TODO : remove hardcode
+        this.timeInMs = this.timeInMinutes* 60 * 1000; // TODO : remove hardcode
         this?.callback();
+        this?.completedCallback();
     }
 
     getFormattedTime(): string {

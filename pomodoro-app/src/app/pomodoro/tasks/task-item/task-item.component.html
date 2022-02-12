@@ -1,6 +1,6 @@
 <div class="task-item-container active">
     <div class="task-item" *ngIf="!showMore">
-        <p>{{index}} - {{task.title}}</p>
+        <p [class.done]="task.completed">{{index}} - {{task.title}}</p>
         <div class="action-button" (click)="showMoreInfo()">
             <img src="assets/icons/more.png" />
         </div>

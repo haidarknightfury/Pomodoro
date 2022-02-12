@@ -9,7 +9,7 @@
 
 <div class="pomodoro">
     <div class="timer">
-        <app-pomodoro-timer></app-pomodoro-timer>
+        <app-pomodoro-timer (timerCompletedEvent)="timerCompleted()"></app-pomodoro-timer>
     </div>
     <div class="tasks card-layout">
         <app-tasks></app-tasks>

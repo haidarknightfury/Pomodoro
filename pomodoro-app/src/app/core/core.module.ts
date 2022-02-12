@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthModule } from '../auth/auth.module';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
+import { TaskService , AbstractTaskService} from './service/task.service';
 
 
 const dbConfig: DBConfig = {
@@ -25,6 +26,7 @@ const dbConfig: DBConfig = {
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   imports: [CommonModule, AuthModule, NgxIndexedDBModule.forRoot(dbConfig)],
-  exports: [HeaderComponent, FooterComponent]
+  exports: [HeaderComponent, FooterComponent],
+  providers: [{provide: AbstractTaskService, useValue: TaskService}]
 })
 export class CoreModule { }

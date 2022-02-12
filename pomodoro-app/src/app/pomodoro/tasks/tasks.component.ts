@@ -11,16 +11,13 @@ import {TaskService} from '../../core/service/task.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private store: Store<{ taskList: { tasks: Task[] } }>,
+  constructor(private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
               private taskService: TaskService) { }
 
   taskItems = [new Task('Fist task', '')];
 
   ngOnInit(): void {
-    this.taskService.getAllTasks().subscribe((res)=> {
-        this.store.dispatch(new taskOperations.LoadTask(res));
-    });
-
+    this.store.dispatch(new taskOperations.LoadTask());
     this.store.select('taskList').subscribe((res)=> {
       this.taskItems = res.tasks;
       console.log('all tasks', res.tasks);
@@ -29,9 +26,7 @@ export class TasksComponent implements OnInit {
 
   addNewTask() {
     const task = new Task('New task','');
-    this.taskService.saveTasks(task).subscribe((res)=> {
-      this.store.dispatch(new taskOperations.AddTask({...task, id: res}));
-    });
+    this.store.dispatch(new taskOperations.AddTask({...task}));
   }
 
   taskUpdated(task:Task, index: number){

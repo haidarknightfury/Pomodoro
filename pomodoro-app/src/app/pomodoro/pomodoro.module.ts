@@ -7,10 +7,12 @@ import { TaskItemComponent } from './tasks/task-item/task-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Store, StoreModule } from '@ngrx/store';
 import * as taskStore from '../pomodoro/store/pomodor.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import {PomodoroEffects} from './store/pomodoro.effects';
 
 @NgModule({
   declarations: [TimerComponent, TasksComponent, PomodoroComponent, TaskItemComponent],
-  imports: [ CommonModule, ReactiveFormsModule, StoreModule.forRoot({taskList: taskStore.TaskReducer })],
+  imports: [ CommonModule, ReactiveFormsModule, StoreModule.forRoot({taskList: taskStore.TaskReducer }), EffectsModule.forRoot([PomodoroEffects])],
   exports : [TimerComponent]
 })
 export class PomodoroModule { }
