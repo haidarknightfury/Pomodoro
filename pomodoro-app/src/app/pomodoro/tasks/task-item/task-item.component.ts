@@ -17,6 +17,9 @@ export class TaskItemComponent implements OnInit {
   @Input()
   index: number = 0;
 
+  @Input()
+  active: boolean = false;
+
   @Output()
   taskUpdated: EventEmitter<Task> = new EventEmitter();
 

@@ -10,7 +10,7 @@
             <img src="assets/images/no-item.svg" alt="no-result" />
         </div>
         <div class="task-items" *ngIf="taskItems.length > 0">
-            <app-task-item (taskUpdated)="taskUpdated($event, i)" (taskDeleted)="taskDeleted($event, i)" [index]="i+1" [task]="item" *ngFor="let item of taskItems; let i = index"></app-task-item>
+            <app-task-item [active]="isActive(item)" (taskUpdated)="taskUpdated($event, i)" (taskDeleted)="taskDeleted($event, i)" [index]="i+1" [task]="item" *ngFor="let item of taskItems; let i = index"></app-task-item>
         </div>
         <div class="new-task" (click)="addNewTask()">+ Add Task</div>
     </div>

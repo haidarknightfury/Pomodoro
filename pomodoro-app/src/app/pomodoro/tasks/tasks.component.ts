@@ -15,11 +15,13 @@ export class TasksComponent implements OnInit {
               private taskService: TaskService) { }
 
   taskItems = [new Task('Fist task', '')];
+  activeTask:Task = undefined;
 
   ngOnInit(): void {
     this.store.dispatch(new taskOperations.LoadTask());
     this.store.select('taskList').subscribe((res)=> {
       this.taskItems = res.tasks;
+      this.activeTask = res.activeTask;
       console.log('all tasks', res.tasks);
     });
   }
@@ -39,6 +41,10 @@ export class TasksComponent implements OnInit {
     this.taskService.deleteTask(task).subscribe((res)=>{
         this.store.dispatch(new taskOperations.DeleteTask(index));
     });
+  }
+
+  isActive(task:Task) {
+    return this.activeTask.id === task.id;
   }
 
 }

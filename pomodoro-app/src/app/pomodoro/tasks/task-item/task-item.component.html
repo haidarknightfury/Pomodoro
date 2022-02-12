@@ -1,4 +1,4 @@
-<div class="task-item-container active">
+<div class="task-item-container" [class.active]="this.active">
     <div class="task-item" *ngIf="!showMore">
         <p [class.done]="task.completed">{{index}} - {{task.title}}</p>
         <div class="action-button" (click)="showMoreInfo()">
