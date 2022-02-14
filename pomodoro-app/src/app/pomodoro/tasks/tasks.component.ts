@@ -44,7 +44,7 @@ export class TasksComponent implements OnInit {
   }
 
   isActive(task:Task) {
-    return this.activeTask.id === task.id;
+    return this.activeTask?.id === task?.id;
   }
 
 }
