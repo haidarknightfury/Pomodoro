@@ -57,8 +57,6 @@ export class TaskService extends AbstractTaskService {
     }
 
     updateTask(task: Task): Observable<any> {
-        this.notifyTaskDone(task);
-        this.store.dispatch(new taskOperations.MarkTaskAsDone());
         const updatedTask = {...task, completed: true};
         return from(this.dbService.update(this.storeName, updatedTask));
     }

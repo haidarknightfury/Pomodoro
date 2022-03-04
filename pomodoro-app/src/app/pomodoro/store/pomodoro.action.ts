@@ -42,7 +42,7 @@ export class DeleteTask implements Action {
 
 export class MarkTaskAsDone implements Action {
     readonly type = MARK_TASK_AS_DONE;
-    constructor(){}
+    constructor(public payload: {activeTask:Task, index: number}){}
 }
 
 export type TaskAction = AddTask | UpdateTask | DeleteTask |LoadTask|MarkTaskAsDone | TaskAdded | TaskLoaded;

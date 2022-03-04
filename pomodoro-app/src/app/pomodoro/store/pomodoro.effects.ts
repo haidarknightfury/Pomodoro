@@ -5,11 +5,13 @@ import { map, switchMap } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/service/task.service';
 import { Task } from 'src/app/core/model/task.model';
 import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class PomodoroEffects {
 
     constructor(private actions$: Actions,
+        private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
         private taskService: TaskService) { }
 
     @Effect()
@@ -29,5 +31,19 @@ export class PomodoroEffects {
         ofType(pomodoroOperation.LOAD_TASK),
         switchMap(() => this.taskService.getAllTasks()),
         switchMap((allTasks)=> [new pomodoroOperation.TaskLoaded(allTasks)])
+    )
+
+
+    @Effect()
+    markTaskAsDone = this.actions$.pipe(
+        ofType(pomodoroOperation.MARK_TASK_AS_DONE),
+        map((markTaskAsDoneAction: pomodoroOperation.MarkTaskAsDone) => markTaskAsDoneAction.payload),
+        switchMap((payload) => {
+            const updatedActiveTask = {...payload.activeTask, completed: true};
+            this.taskService.updateTask(updatedActiveTask);
+            this.taskService.notifyTaskDone(updatedActiveTask);
+            return [new pomodoroOperation.UpdateTask({index: payload.index, task: updatedActiveTask})];
+        })
+
     )
 }
