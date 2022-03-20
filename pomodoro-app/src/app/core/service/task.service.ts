@@ -43,8 +43,7 @@ export abstract class AbstractTaskService implements ITaskService {
 export class TaskService extends AbstractTaskService {
 
     readonly storeName: string = 'tasks';
-    constructor(private dbService: NgxIndexedDBService,
-                private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>) {
+    constructor(private dbService: NgxIndexedDBService) {
         super();
     }
 
@@ -57,6 +56,7 @@ export class TaskService extends AbstractTaskService {
     }
 
     updateTask(task: Task): Observable<any> {
+        console.log('updating task', task);
         const updatedTask = {...task, completed: true};
         return from(this.dbService.update(this.storeName, updatedTask));
     }

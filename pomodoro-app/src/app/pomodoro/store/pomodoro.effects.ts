@@ -4,7 +4,7 @@ import * as pomodoroOperation from './pomodoro.action';
 import { map, switchMap } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/service/task.service';
 import { Task } from 'src/app/core/model/task.model';
-import { of } from 'rxjs';
+import { forkJoin, Observable, of, zip } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,10 @@ export class PomodoroEffects {
         map((addTaskAction: pomodoroOperation.AddTask) => addTaskAction.payload),
         switchMap((task) => {
             const res = this.taskService.saveTasks(task);
-            return of({ ...task, id: res })
+            return forkJoin([res, of(task)])
+        }),
+        map((combined)=> {
+            return ({...combined[1], id: combined[0]})
         }),
         switchMap((newTask: Task)=> [new pomodoroOperation.TaskAdded(newTask)])
     )

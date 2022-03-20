@@ -3,7 +3,6 @@ import * as taskOperations from './pomodoro.action';
 
 const initialTaskState = {
     tasks: [],
-    completedTasks: [],
     activeTask: undefined
 }
 

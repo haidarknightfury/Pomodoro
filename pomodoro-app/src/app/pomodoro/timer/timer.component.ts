@@ -58,8 +58,8 @@ export class TimerComponent implements OnInit {
   initialiseTimerModes() {
     this.pomodoroTimers = [];
     this.pomodoroTimers.push(new TimerMode(0.1, 'Pomodoro', true));
-    this.pomodoroTimers.push(new TimerMode(15, 'Short break', false));
-    this.pomodoroTimers.push(new TimerMode(20, 'Long break', false));
+    this.pomodoroTimers.push(new TimerMode(10, 'Short break', false));
+    this.pomodoroTimers.push(new TimerMode(25, 'Long break', false));
   }
 
   setCurrentTimer(timer: TimerMode) {
@@ -71,6 +71,15 @@ export class TimerComponent implements OnInit {
 
   getActiveTimer(): TimerMode {
     return this.pomodoroTimers.find(timer => timer.active);
+  }
+
+  nextTimer(direction = 1){
+    const activeIndex = this.pomodoroTimers.findIndex(timerVal => timerVal.active);
+    const nextActiveIndex = ((activeIndex + direction) < 0  ? (this.pomodoroTimers.length - Math.abs(activeIndex + direction)) : (activeIndex + direction)) % this.pomodoroTimers.length;
+    this.pomodoroTimers.forEach(timerVal => timerVal.active = false);
+    this.pomodoroTimers.filter((_, index)=> index === nextActiveIndex).forEach(timerVal => timerVal.active = true);
+    this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
+    this.currentTime = this.timer.getFormattedTime();
   }
 
 }

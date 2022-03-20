@@ -46,6 +46,7 @@ export class TaskItemComponent implements OnInit {
     updatedTask.completed = this.task.completed;
     updatedTask.estPomodoro = this.task.estPomodoro;
     this.showMore = !this.showMore;
+    console.log('updating task', updatedTask);
     this.taskUpdated.emit(updatedTask);
   }
 

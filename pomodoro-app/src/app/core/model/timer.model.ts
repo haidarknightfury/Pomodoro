@@ -7,36 +7,36 @@ export class Timer {
     private timerInterval: any = null;
     private timeInMinutes;
 
-    constructor(timeInMs: number, interval = 1000,
-                callback: (...args: any[]) => void, 
-                private completedCallback?:(...args:any[]) => void){
+    private readonly TIME_MS = 1000;
+
+    constructor(timeInMs: number, interval = 1000,  callback: (...args: any[]) => void, private completedCallback?: (...args: any[]) => void) {
         this.timeInMs = timeInMs;
         this.interval = interval;
         this.callback = callback;
-        this.timeInMinutes = timeInMs / (60*1000);
+        this.timeInMinutes = timeInMs / (60 * this.TIME_MS);
     }
 
-    hasStarted () {
+    hasStarted() {
         return this.timerInterval !== null
     }
 
     start() {
-      this.timerInterval = setInterval(()=> {
+        this.timerInterval = setInterval(() => {
             this.timeInMs -= this.interval;
             this?.callback();
-            if (this.timeInMs < 0) this.stop(); 
-       }, this.interval);
+            if (this.timeInMs < 0) this.stop();
+        }, this.interval);
     }
 
     stop() {
         clearInterval(this?.timerInterval);
         this.timerInterval = null;
-        this.timeInMs = this.timeInMinutes* 60 * 1000; // TODO : remove hardcode
+        this.timeInMs = this.timeInMinutes * 60 * this.TIME_MS;
         this?.callback();
         this?.completedCallback();
     }
 
     getFormattedTime(): string {
-        return (Math.floor((this.timeInMs/ 1000) / (60))) + ' : '  + (((this.timeInMs/1000) % 60) + '').padStart(2, '0');
+        return (Math.floor((this.timeInMs / this.TIME_MS) / (60))) + ' : ' + (((this.timeInMs / this.TIME_MS) % 60) + '').padStart(2, '0');
     }
 }

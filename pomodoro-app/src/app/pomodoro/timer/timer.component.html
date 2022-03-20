@@ -1,5 +1,5 @@
 <div class="pomodoro-timer">
-    <div class="previous">&lt; &lt;</div>
+    <button class="previous" (click)="nextTimer(-1)">&lt; &lt;</button>
     <div class="timer">
         <div class="action-buttons">
             <button class="form-button primary" [class.active]="timer.active" *ngFor="let timer of pomodoroTimers" (click)="setCurrentTimer(timer)">{{timer.label}}</button>
@@ -12,5 +12,5 @@
         </div>
 
     </div>
-    <div class="next">&gt; &gt;</div>
+    <button class="next" (click)="nextTimer()">&gt; &gt;</button>
 </div>

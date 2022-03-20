@@ -9,9 +9,10 @@ import { Store, StoreModule } from '@ngrx/store';
 import * as taskStore from '../pomodoro/store/pomodor.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {PomodoroEffects} from './store/pomodoro.effects';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
-  declarations: [TimerComponent, TasksComponent, PomodoroComponent, TaskItemComponent],
+  declarations: [TimerComponent, TasksComponent, PomodoroComponent, TaskItemComponent, SettingsComponent],
   imports: [ CommonModule, ReactiveFormsModule, StoreModule.forRoot({taskList: taskStore.TaskReducer }), EffectsModule.forRoot([PomodoroEffects])],
   exports : [TimerComponent]
 })

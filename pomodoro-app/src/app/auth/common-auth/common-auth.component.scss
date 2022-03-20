@@ -37,3 +37,23 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .login {
+        height: 95%;
+        width: 100%;
+        margin-bottom: 5%;
+        .illustration {
+            display: none;
+        }
+        .form-container {
+            width: 90%;
+            .form {
+                padding: 5%;
+                .login-input {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

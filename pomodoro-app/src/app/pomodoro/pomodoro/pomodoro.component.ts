@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Task } from 'src/app/core/model/task.model';
+import { Timer } from 'src/app/core/model/timer.model';
 import { TaskService } from 'src/app/core/service/task.service';
 import * as pomodoroAction from '../store/pomodoro.action';
 
@@ -17,7 +18,7 @@ export class PomodoroComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  timerCompleted(){
+  timerCompleted(timer: Timer){
     this.store.select('taskList').pipe(take(1)).subscribe((state)=>{ 
       const activeTaskIndex = state.tasks.findIndex((task)=> (task as Task).id === state.activeTask.id);
       this.store.dispatch(new pomodoroAction.MarkTaskAsDone({activeTask: state.activeTask, index: activeTaskIndex}))
