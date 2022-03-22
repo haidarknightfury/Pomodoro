@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Task } from 'src/app/core/model/task.model';
@@ -14,7 +15,8 @@ import * as pomodoroAction from '../store/pomodoro.action';
 export class PomodoroComponent implements OnInit {
 
   constructor(private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
-    private taskService: TaskService) { }
+              private router: Router,
+              private taskService: TaskService) { }
 
   ngOnInit(): void { }
 
@@ -26,6 +28,11 @@ export class PomodoroComponent implements OnInit {
     
         // this.notifyTaskDone(task);
         // this.store.dispatch(new taskOperations.MarkTaskAsDone());
+  }
+
+
+  gotoSettings(){
+    this.router.navigate(['/', 'settings']);
   }
 
 }

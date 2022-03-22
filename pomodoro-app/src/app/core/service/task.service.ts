@@ -21,6 +21,10 @@ export abstract class AbstractTaskService implements ITaskService {
     abstract updateTask(task: Task): Observable<any>;
     abstract deleteTask(task: Task): Observable<any>;
 
+    constructor(){
+        Notification.requestPermission();
+    }
+
     notifyTaskDone(task: Task) {
         const notificationMessage = `task with title ${task.title} and details : ${task.note} has been completed`;
         if (!("Notification" in window)) {
@@ -56,8 +60,7 @@ export class TaskService extends AbstractTaskService {
     }
 
     updateTask(task: Task): Observable<any> {
-        console.log('updating task', task);
-        const updatedTask = {...task, completed: true};
+        const updatedTask = {...task};
         return from(this.dbService.update(this.storeName, updatedTask));
     }
 
@@ -65,3 +68,4 @@ export class TaskService extends AbstractTaskService {
         return from(this.dbService.delete(this.storeName, task.id));
     }
 }
+

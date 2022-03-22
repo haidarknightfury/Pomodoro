@@ -1,16 +1,18 @@
-<div class="settings">
-    <h4>TIMER SETTING</h4>
+<div class="card settings">
+    <h2 class="bold">Timer Settings</h2>
     <div class="timer-setting">
-        <h5>Time(minutes)</h5>
         <div class="times">
-            <div class="individual-timer">
-                <label for="txtTime"></label>
-                <input type="number" name="txtTime" id="txtTime">
-            </div>
+            <ng-container *ngFor="let timer of settingOptions">
+                <div class="form-input w-75">
+                    <label for="txtPomodoroTimer">{{ timer.title }}</label>
+                    <input type="number" name="txt{{timer.name}}" id="txt{{timer.name}}">
+                </div>
+            </ng-container>
         </div>
     </div>
 
-    <div class="btn-container">
-        <button class="form-button primary w-25">Save changes</button>
+    <div class="btn-container w-100">
+        <button class="form-button primary" (click)=saveChanges()>Save changes</button>
+        <button class="form-button primary" (click)="backToPomodoro()">Back to pomodoro</button>
     </div>
 </div>

@@ -21,11 +21,14 @@
     padding: 16px;
     line-height: 24px;
     &.small {
-        width: 100px;
+        width: fit-content;
         padding: 8px;
         height: 20px;
         margin: 0 4px 8px;
         line-height: 12px;
+    }
+    &.hoverable {
+        cursor: pointer;
     }
 }
 

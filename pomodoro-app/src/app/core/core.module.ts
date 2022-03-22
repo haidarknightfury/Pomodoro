@@ -5,6 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AuthModule } from '../auth/auth.module';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { TaskService , AbstractTaskService} from './service/task.service';
+import { HoverableDirective } from './directives/hoverable.directive';
 
 
 const dbConfig: DBConfig = {

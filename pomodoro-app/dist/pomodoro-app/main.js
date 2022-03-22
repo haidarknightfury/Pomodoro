@@ -628,8 +628,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var ngx_indexed_db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-indexed-db */ "./node_modules/ngx-indexed-db/__ivy_ngcc__/fesm2015/ngx-indexed-db.js");
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/__ivy_ngcc__/fesm2015/ngrx-store.js");
-
 
 
 
@@ -653,10 +651,9 @@ class AbstractTaskService {
     }
 }
 class TaskService extends AbstractTaskService {
-    constructor(dbService, store) {
+    constructor(dbService) {
         super();
         this.dbService = dbService;
-        this.store = store;
         this.storeName = 'tasks';
     }
     saveTasks(task) {
@@ -666,6 +663,7 @@ class TaskService extends AbstractTaskService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.dbService.getAll(this.storeName));
     }
     updateTask(task) {
+        console.log('updating task', task);
         const updatedTask = Object.assign(Object.assign({}, task), { completed: true });
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.dbService.update(this.storeName, updatedTask));
     }
@@ -673,12 +671,12 @@ class TaskService extends AbstractTaskService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.dbService.delete(this.storeName, task.id));
     }
 }
-TaskService.ɵfac = function TaskService_Factory(t) { return new (t || TaskService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](ngx_indexed_db__WEBPACK_IMPORTED_MODULE_2__["NgxIndexedDBService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"])); };
+TaskService.ɵfac = function TaskService_Factory(t) { return new (t || TaskService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](ngx_indexed_db__WEBPACK_IMPORTED_MODULE_2__["NgxIndexedDBService"])); };
 TaskService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: TaskService, factory: TaskService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TaskService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{ providedIn: 'root' }]
-    }], function () { return [{ type: ngx_indexed_db__WEBPACK_IMPORTED_MODULE_2__["NgxIndexedDBService"] }, { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] }]; }, null); })();
+    }], function () { return [{ type: ngx_indexed_db__WEBPACK_IMPORTED_MODULE_2__["NgxIndexedDBService"] }]; }, null); })();
 
 
 /***/ }),
@@ -704,6 +702,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pomodoro_store_pomodor_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pomodoro/store/pomodor.reducer */ "./src/app/pomodoro/store/pomodor.reducer.ts");
 /* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/__ivy_ngcc__/fesm2015/ngrx-effects.js");
 /* harmony import */ var _store_pomodoro_effects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/pomodoro.effects */ "./src/app/pomodoro/store/pomodoro.effects.ts");
+/* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./settings/settings.component */ "./src/app/pomodoro/settings/settings.component.ts");
+
 
 
 
@@ -722,11 +722,11 @@ class PomodoroModule {
 }
 PomodoroModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: PomodoroModule });
 PomodoroModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function PomodoroModule_Factory(t) { return new (t || PomodoroModule)(); }, imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ngrx_store__WEBPACK_IMPORTED_MODULE_7__["StoreModule"].forRoot({ taskList: _pomodoro_store_pomodor_reducer__WEBPACK_IMPORTED_MODULE_8__["TaskReducer"] }), _ngrx_effects__WEBPACK_IMPORTED_MODULE_9__["EffectsModule"].forRoot([_store_pomodoro_effects__WEBPACK_IMPORTED_MODULE_10__["PomodoroEffects"]])]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](PomodoroModule, { declarations: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"], _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_4__["TasksComponent"], _pomodoro_pomodoro_component__WEBPACK_IMPORTED_MODULE_2__["PomodoroComponent"], _tasks_task_item_task_item_component__WEBPACK_IMPORTED_MODULE_5__["TaskItemComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ngrx_store__WEBPACK_IMPORTED_MODULE_7__["StoreRootModule"], _ngrx_effects__WEBPACK_IMPORTED_MODULE_9__["EffectsRootModule"]], exports: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"]] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](PomodoroModule, { declarations: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"], _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_4__["TasksComponent"], _pomodoro_pomodoro_component__WEBPACK_IMPORTED_MODULE_2__["PomodoroComponent"], _tasks_task_item_task_item_component__WEBPACK_IMPORTED_MODULE_5__["TaskItemComponent"], _settings_settings_component__WEBPACK_IMPORTED_MODULE_11__["SettingsComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ngrx_store__WEBPACK_IMPORTED_MODULE_7__["StoreRootModule"], _ngrx_effects__WEBPACK_IMPORTED_MODULE_9__["EffectsRootModule"]], exports: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PomodoroModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
-                declarations: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"], _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_4__["TasksComponent"], _pomodoro_pomodoro_component__WEBPACK_IMPORTED_MODULE_2__["PomodoroComponent"], _tasks_task_item_task_item_component__WEBPACK_IMPORTED_MODULE_5__["TaskItemComponent"]],
+                declarations: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"], _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_4__["TasksComponent"], _pomodoro_pomodoro_component__WEBPACK_IMPORTED_MODULE_2__["PomodoroComponent"], _tasks_task_item_task_item_component__WEBPACK_IMPORTED_MODULE_5__["TaskItemComponent"], _settings_settings_component__WEBPACK_IMPORTED_MODULE_11__["SettingsComponent"]],
                 imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"], _ngrx_store__WEBPACK_IMPORTED_MODULE_7__["StoreModule"].forRoot({ taskList: _pomodoro_store_pomodor_reducer__WEBPACK_IMPORTED_MODULE_8__["TaskReducer"] }), _ngrx_effects__WEBPACK_IMPORTED_MODULE_9__["EffectsModule"].forRoot([_store_pomodoro_effects__WEBPACK_IMPORTED_MODULE_10__["PomodoroEffects"]])],
                 exports: [_timer_timer_component__WEBPACK_IMPORTED_MODULE_3__["TimerComponent"]]
             }]
@@ -766,7 +766,7 @@ class PomodoroComponent {
         this.taskService = taskService;
     }
     ngOnInit() { }
-    timerCompleted() {
+    timerCompleted(timer) {
         this.store.select('taskList').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["take"])(1)).subscribe((state) => {
             const activeTaskIndex = state.tasks.findIndex((task) => task.id === state.activeTask.id);
             this.store.dispatch(new _store_pomodoro_action__WEBPACK_IMPORTED_MODULE_2__["MarkTaskAsDone"]({ activeTask: state.activeTask, index: activeTaskIndex }));
@@ -793,7 +793,7 @@ PomodoroComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "app-pomodoro-timer", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("timerCompletedEvent", function PomodoroComponent_Template_app_pomodoro_timer_timerCompletedEvent_10_listener() { return ctx.timerCompleted(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("timerCompletedEvent", function PomodoroComponent_Template_app_pomodoro_timer_timerCompletedEvent_10_listener($event) { return ctx.timerCompleted($event); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 7);
@@ -809,6 +809,60 @@ PomodoroComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
                 styleUrls: ['./pomodoro.component.scss']
             }]
     }], function () { return [{ type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] }, { type: src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_4__["TaskService"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/pomodoro/settings/settings.component.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/pomodoro/settings/settings.component.ts ***!
+  \*********************************************************/
+/*! exports provided: SettingsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsComponent", function() { return SettingsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+class SettingsComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+SettingsComponent.ɵfac = function SettingsComponent_Factory(t) { return new (t || SettingsComponent)(); };
+SettingsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SettingsComponent, selectors: [["app-settings"]], decls: 13, vars: 0, consts: [[1, "settings"], [1, "timer-setting"], [1, "times"], [1, "individual-timer"], ["for", "txtTime"], ["type", "number", "name", "txtTime", "id", "txtTime"], [1, "btn-container"], [1, "form-button", "primary", "w-25"]], template: function SettingsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h4");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "TIMER SETTING");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h5");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Time(minutes)");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "label", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "input", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Save changes");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BvbW9kb3JvL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIn0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SettingsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-settings',
+                templateUrl: './settings.component.html',
+                styleUrls: ['./settings.component.scss']
+            }]
+    }], function () { return []; }, null); })();
 
 
 /***/ }),
@@ -946,9 +1000,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pomodoro_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pomodoro.action */ "./src/app/pomodoro/store/pomodoro.action.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/__ivy_ngcc__/fesm2015/ngrx-store.js");
-/* harmony import */ var src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/service/task.service */ "./src/app/core/service/task.service.ts");
-
+/* harmony import */ var src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/service/task.service */ "./src/app/core/service/task.service.ts");
 
 
 
@@ -959,13 +1011,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class PomodoroEffects {
-    constructor(actions$, store, taskService) {
+    constructor(actions$, taskService) {
         this.actions$ = actions$;
-        this.store = store;
         this.taskService = taskService;
         this.taskAddedEffect = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_pomodoro_action__WEBPACK_IMPORTED_MODULE_3__["ADD_TASK"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((addTaskAction) => addTaskAction.payload), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])((task) => {
             const res = this.taskService.saveTasks(task);
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(Object.assign(Object.assign({}, task), { id: res }));
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["forkJoin"])([res, Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(task)]);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((combined) => {
+            return (Object.assign(Object.assign({}, combined[1]), { id: combined[0] }));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])((newTask) => [new _pomodoro_action__WEBPACK_IMPORTED_MODULE_3__["TaskAdded"](newTask)]));
         this.tasksLoadedEffect = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_pomodoro_action__WEBPACK_IMPORTED_MODULE_3__["LOAD_TASK"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(() => this.taskService.getAllTasks()), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])((allTasks) => [new _pomodoro_action__WEBPACK_IMPORTED_MODULE_3__["TaskLoaded"](allTasks)]));
         this.markTaskAsDone = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_pomodoro_action__WEBPACK_IMPORTED_MODULE_3__["MARK_TASK_AS_DONE"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((markTaskAsDoneAction) => markTaskAsDoneAction.payload), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])((payload) => {
@@ -976,7 +1029,7 @@ class PomodoroEffects {
         }));
     }
 }
-PomodoroEffects.ɵfac = function PomodoroEffects_Factory(t) { return new (t || PomodoroEffects)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_6__["Store"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_7__["TaskService"])); };
+PomodoroEffects.ɵfac = function PomodoroEffects_Factory(t) { return new (t || PomodoroEffects)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_6__["TaskService"])); };
 PomodoroEffects.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: PomodoroEffects, factory: PomodoroEffects.ɵfac, providedIn: 'root' });
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Effect"])()
@@ -990,7 +1043,7 @@ Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](PomodoroEffects, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
         args: [{ providedIn: 'root' }]
-    }], function () { return [{ type: _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"] }, { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_6__["Store"] }, { type: src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_7__["TaskService"] }]; }, { taskAddedEffect: [], tasksLoadedEffect: [], markTaskAsDone: [] }); })();
+    }], function () { return [{ type: _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"] }, { type: src_app_core_service_task_service__WEBPACK_IMPORTED_MODULE_6__["TaskService"] }]; }, { taskAddedEffect: [], tasksLoadedEffect: [], markTaskAsDone: [] }); })();
 
 
 /***/ }),
@@ -1092,6 +1145,7 @@ class TaskItemComponent {
         updatedTask.completed = this.task.completed;
         updatedTask.estPomodoro = this.task.estPomodoro;
         this.showMore = !this.showMore;
+        console.log('updating task', updatedTask);
         this.taskUpdated.emit(updatedTask);
     }
     delete() {
@@ -1341,7 +1395,7 @@ class TimerComponent {
     }
     initialiseTimerModes() {
         this.pomodoroTimers = [];
-        this.pomodoroTimers.push(new TimerMode(20, 'Pomodoro', true));
+        this.pomodoroTimers.push(new TimerMode(0.1, 'Pomodoro', true));
         this.pomodoroTimers.push(new TimerMode(10, 'Short break', false));
         this.pomodoroTimers.push(new TimerMode(25, 'Long break', false));
     }
@@ -1354,11 +1408,20 @@ class TimerComponent {
     getActiveTimer() {
         return this.pomodoroTimers.find(timer => timer.active);
     }
+    nextTimer(direction = 1) {
+        const activeIndex = this.pomodoroTimers.findIndex(timerVal => timerVal.active);
+        const nextActiveIndex = ((activeIndex + direction) < 0 ? (this.pomodoroTimers.length - Math.abs(activeIndex + direction)) : (activeIndex + direction)) % this.pomodoroTimers.length;
+        this.pomodoroTimers.forEach(timerVal => timerVal.active = false);
+        this.pomodoroTimers.filter((_, index) => index === nextActiveIndex).forEach(timerVal => timerVal.active = true);
+        this.timer = new _core_model_timer_model__WEBPACK_IMPORTED_MODULE_1__["Timer"](this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
+        this.currentTime = this.timer.getFormattedTime();
+    }
 }
 TimerComponent.ɵfac = function TimerComponent_Factory(t) { return new (t || TimerComponent)(); };
-TimerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TimerComponent, selectors: [["app-pomodoro-timer"]], outputs: { timerCompletedEvent: "timerCompletedEvent" }, decls: 13, vars: 4, consts: [[1, "pomodoro-timer"], [1, "previous"], [1, "timer"], [1, "action-buttons"], ["class", "form-button primary", 3, "active", "click", 4, "ngFor", "ngForOf"], [1, "time"], [1, "start-stop"], ["class", "form-button primary", 3, "click", 4, "ngIf"], [1, "next"], [1, "form-button", "primary", 3, "click"]], template: function TimerComponent_Template(rf, ctx) { if (rf & 1) {
+TimerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TimerComponent, selectors: [["app-pomodoro-timer"]], outputs: { timerCompletedEvent: "timerCompletedEvent" }, decls: 13, vars: 4, consts: [[1, "pomodoro-timer"], [1, "previous", 3, "click"], [1, "timer"], [1, "action-buttons"], ["class", "form-button primary", 3, "active", "click", 4, "ngFor", "ngForOf"], [1, "time"], [1, "start-stop"], ["class", "form-button primary", 3, "click", 4, "ngIf"], [1, "next", 3, "click"], [1, "form-button", "primary", 3, "click"]], template: function TimerComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TimerComponent_Template_button_click_1_listener() { return ctx.nextTimer(0 - 1); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "< <");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 2);
@@ -1373,7 +1436,8 @@ TimerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, TimerComponent_button_10_Template, 2, 0, "button", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TimerComponent_Template_button_click_11_listener() { return ctx.nextTimer(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "> >");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();

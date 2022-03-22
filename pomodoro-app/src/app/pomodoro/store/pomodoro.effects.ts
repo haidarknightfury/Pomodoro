@@ -11,7 +11,6 @@ import { Store } from '@ngrx/store';
 export class PomodoroEffects {
 
     constructor(private actions$: Actions,
-        private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
         private taskService: TaskService) { }
 
     @Effect()
