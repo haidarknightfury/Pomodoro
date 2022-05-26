@@ -50,3 +50,8 @@
 .form-button {
     @include btn;
 }
+
+button:disabled,
+button[disabled] .form-button {
+    background: lightgray !important;
+}

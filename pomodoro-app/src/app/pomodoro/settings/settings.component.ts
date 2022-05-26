@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TimerService } from 'src/app/core/service/timer.service';
 
 @Component({
   selector: 'app-settings',
@@ -9,24 +11,23 @@ import { Router } from '@angular/router';
 export class SettingsComponent implements OnInit {
 
 
-  settingOptions = [
-    {
-      title: 'Pomodoro timer (in minutes)',
-      name: 'Pomodoro'
-    },
-    {
-      title: 'Short break (in minutes)',
-      name: 'ShortBreak'
-    },
-    {
-      title: 'Long break (in minutes)',
-      name: 'LongBreak'
-    }
-  ]
+  settingOptions : any[];
+  formGroup: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private timerService: TimerService) { }
 
   ngOnInit(): void {
+    this.settingOptions = this.timerService.getFormControls(this.timerService.getTimers());
+    this.formGroup = this.getFormGroup(this.settingOptions);
+  }
+
+  getFormGroup(options: any[]) {
+    const fg = {}
+    options.forEach(opt => {
+      fg[opt.timer.modelValue] = opt.formControl
+    }); 
+    return new FormGroup(fg);
   }
 
   backToPomodoro() {
@@ -34,7 +35,7 @@ export class SettingsComponent implements OnInit {
   }
 
   saveChanges() {
-
+    console.log(this.formGroup.value);
     this.backToPomodoro();
   }
 

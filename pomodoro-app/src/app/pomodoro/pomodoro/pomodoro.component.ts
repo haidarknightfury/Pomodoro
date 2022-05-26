@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 import { Task } from 'src/app/core/model/task.model';
 import { Timer } from 'src/app/core/model/timer.model';
 import { TaskService } from 'src/app/core/service/task.service';
-import * as pomodoroAction from '../store/pomodoro.action';
+import * as pomodoroAction from '../store/pomodoro/pomodoro.action';
 
 @Component({
   selector: 'app-pomodoro',

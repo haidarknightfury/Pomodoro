@@ -1,4 +1,4 @@
-import { Task } from '../../core/model/task.model';
+import { Task } from '../../../core/model/task.model';
 import * as taskOperations from './pomodoro.action';
 
 const initialTaskState = {

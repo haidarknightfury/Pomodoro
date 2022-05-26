@@ -1,17 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Timer } from '../../core/model/timer.model';
+import {TimerMode} from '../../core/model/timer-mode.model';
+import {TimerService} from '../../core/service/timer.service';
 
-class TimerMode {
-  timeInMins: number;
-  active: boolean;
-  label: string;
-
-  constructor(time, label: string, active = false) {
-    this.timeInMins = time;
-    this.label = label;
-    this.active = active;
-  }
-}
 
 @Component({
   selector: 'app-pomodoro-timer',
@@ -20,7 +11,7 @@ class TimerMode {
 })
 export class TimerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private timerService:TimerService) { }
 
   timer: Timer;
   currentTime: string = '';
@@ -56,10 +47,7 @@ export class TimerComponent implements OnInit {
   }
 
   initialiseTimerModes() {
-    this.pomodoroTimers = [];
-    this.pomodoroTimers.push(new TimerMode(0.1, 'Pomodoro', true));
-    this.pomodoroTimers.push(new TimerMode(10, 'Short break', false));
-    this.pomodoroTimers.push(new TimerMode(25, 'Long break', false));
+    this.pomodoroTimers = this.timerService.getTimers();
   }
 
   setCurrentTimer(timer: TimerMode) {

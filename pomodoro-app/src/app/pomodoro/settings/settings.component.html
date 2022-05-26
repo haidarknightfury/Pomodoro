@@ -2,17 +2,17 @@
     <h2 class="bold">Timer Settings</h2>
     <div class="timer-setting">
         <div class="times">
-            <ng-container *ngFor="let timer of settingOptions">
+            <ng-container *ngFor="let option of settingOptions">
                 <div class="form-input w-75">
-                    <label for="txtPomodoroTimer">{{ timer.title }}</label>
-                    <input type="number" name="txt{{timer.name}}" id="txt{{timer.name}}">
+                    <label for="txt{{option.timer.label}}">{{ option.timer.description }}</label>
+                    <input type="number" name="txt{{option.timer.label}}" id="txt{{option.timer.label}}" min="0" [formControl]="option.formControl">
                 </div>
             </ng-container>
         </div>
     </div>
 
     <div class="btn-container w-100">
-        <button class="form-button primary" (click)=saveChanges()>Save changes</button>
+        <button [disabled]="!formGroup.valid" class="form-button primary" (click)=saveChanges()>Save changes</button>
         <button class="form-button primary" (click)="backToPomodoro()">Back to pomodoro</button>
     </div>
 </div>

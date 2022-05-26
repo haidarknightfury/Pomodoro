@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {Task} from '../../core/model/task.model';
+import {Task} from '../../../core/model/task.model';
 
 export const ADD_TASK = 'ADD_TASK';
 export const TASK_ADDED = 'TASK_ADDED';

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Task } from '../../core/model/task.model';
-import * as taskOperations from '../store/pomodoro.action';
+import * as taskOperations from '../store/pomodoro/pomodoro.action';
 import {TaskService} from '../../core/service/task.service';
 @Component({
   selector: 'app-tasks',

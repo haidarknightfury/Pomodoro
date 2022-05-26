@@ -4,7 +4,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as taskOperations from '../../pomodoro/store/pomodoro.action'
+import * as taskOperations from '../../pomodoro/store/pomodoro/pomodoro.action'
 
 
 export interface ITaskService {
@@ -28,7 +28,7 @@ export abstract class AbstractTaskService implements ITaskService {
     notifyTaskDone(task: Task) {
         const notificationMessage = `task with title ${task.title} and details : ${task.note} has been completed`;
         if (!("Notification" in window)) {
-            alert("This browser does not support desktop notification");
+            alert(notificationMessage);
         }
         else if (Notification.permission === "granted") {
             var notification = new Notification(notificationMessage);
@@ -42,6 +42,7 @@ export abstract class AbstractTaskService implements ITaskService {
         }
     }
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class TaskService extends AbstractTaskService {

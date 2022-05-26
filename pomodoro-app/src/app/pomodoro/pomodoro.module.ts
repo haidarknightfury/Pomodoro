@@ -6,9 +6,9 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskItemComponent } from './tasks/task-item/task-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Store, StoreModule } from '@ngrx/store';
-import * as taskStore from '../pomodoro/store/pomodor.reducer';
+import * as taskStore from './store/pomodoro/pomodor.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import {PomodoroEffects} from './store/pomodoro.effects';
+import {PomodoroEffects} from './store/pomodoro/pomodoro.effects';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
