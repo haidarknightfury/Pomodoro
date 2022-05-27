@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Task } from '../../core/model/task.model';
 import * as taskOperations from '../store/pomodoro/pomodoro.action';
 import {TaskService} from '../../core/service/task.service';
+import * as fromTaskList from '../store/pomodoro/pomodor.reducer';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -10,7 +12,7 @@ import {TaskService} from '../../core/service/task.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
+  constructor(private store: Store<{ taskList: fromTaskList.TaskState}>,
               private taskService: TaskService) { }
 
   taskItems = [new Task('Fist task', '')];

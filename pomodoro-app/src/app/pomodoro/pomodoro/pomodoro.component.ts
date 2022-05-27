@@ -6,6 +6,7 @@ import { Task } from 'src/app/core/model/task.model';
 import { Timer } from 'src/app/core/model/timer.model';
 import { TaskService } from 'src/app/core/service/task.service';
 import * as pomodoroAction from '../store/pomodoro/pomodoro.action';
+import * as fromModel from '../store/pomodoro/pomodor.reducer';
 
 @Component({
   selector: 'app-pomodoro',
@@ -14,7 +15,7 @@ import * as pomodoroAction from '../store/pomodoro/pomodoro.action';
 })
 export class PomodoroComponent implements OnInit {
 
-  constructor(private store: Store<{ taskList: { tasks: Task[] , activeTask:Task} }>,
+  constructor(private store: Store<{ taskList: fromModel.TaskState}>,
               private router: Router,
               private taskService: TaskService) { }
 

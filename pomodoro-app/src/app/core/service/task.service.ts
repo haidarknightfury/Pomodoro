@@ -22,24 +22,12 @@ export abstract class AbstractTaskService implements ITaskService {
     abstract deleteTask(task: Task): Observable<any>;
 
     constructor(){
-        Notification.requestPermission();
+      
     }
 
     notifyTaskDone(task: Task) {
         const notificationMessage = `task with title ${task.title} and details : ${task.note} has been completed`;
-        if (!("Notification" in window)) {
-            alert(notificationMessage);
-        }
-        else if (Notification.permission === "granted") {
-            var notification = new Notification(notificationMessage);
-        }
-        else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then((permission)=> {
-                if (permission === "granted") {
-                    var notification = new Notification(notificationMessage);
-                }
-            });
-        }
+        alert(notificationMessage);
     }
 }
 

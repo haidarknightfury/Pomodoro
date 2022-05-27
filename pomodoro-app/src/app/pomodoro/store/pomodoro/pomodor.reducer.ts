@@ -1,16 +1,22 @@
 import { Task } from '../../../core/model/task.model';
 import * as taskOperations from './pomodoro.action';
 
-const initialTaskState = {
+
+export interface TaskState {
+    tasks: Task[],
+    activeTask: Task
+}
+
+const initialTaskState: TaskState = {
     tasks: [],
     activeTask: undefined
 }
 
-export function TaskReducer(state = initialTaskState, action: taskOperations.TaskAction) {
+export function TaskReducer(state: TaskState = initialTaskState, action: taskOperations.TaskAction) {
     console.log('task reducer action', action);
     switch (action.type) {
         case taskOperations.TASK_ADDED:
-            const noTaskYet = state.tasks.length === 0 && action.payload;
+            const noTaskYet = (state.tasks.length === 0 && action.payload )|| state.tasks.every((task) => task.completed);
             return { ...state, tasks: [...state.tasks, action.payload], activeTask: noTaskYet ? action.payload : state.tasks.find(task => !task.completed)};
         case taskOperations.UPDATE_TASK:
             const taskToUpdate = state.tasks[action.payload.index];

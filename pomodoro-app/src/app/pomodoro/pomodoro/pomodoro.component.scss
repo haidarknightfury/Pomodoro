@@ -1,6 +1,7 @@
 @import "cards";
 :host {
     width: 30%;
+    min-width: 500px;
 }
 
 @media only screen and (max-width: 768px) {
