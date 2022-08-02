@@ -1,4 +1,5 @@
 export class TimerMode {
+    id: any;
     timeInMins: number;
     active: boolean;
     label: string;

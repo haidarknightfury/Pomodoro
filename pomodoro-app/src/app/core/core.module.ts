@@ -5,12 +5,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AuthModule } from '../auth/auth.module';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { TaskService , AbstractTaskService} from './service/task.service';
-import { HoverableDirective } from './directives/hoverable.directive';
+import { TimerMode } from './model/timer-mode.model';
+
+
+
 
 
 const dbConfig: DBConfig = {
   name: 'pomodorodb',
-  version: 1,
+  version: 3,
   objectStoresMeta: [
     {
       store: 'tasks', storeConfig: { keyPath: 'id', autoIncrement: true },
@@ -19,6 +22,16 @@ const dbConfig: DBConfig = {
         { name: 'note', keypath: 'note', options: { unique: false } },
         { name: 'estPomodoro', keypath: 'estPomodoro', options: { unique: false } },
         { name: 'completed', keypath: 'completed', options: { unique: false } }
+      ]
+    },
+    {
+      store: 'timers', storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        { name: 'timeInMins', keypath: 'timeInMins', options: { unique: false } },
+        { name: 'active', keypath: 'active', options: { unique: false } },
+        { name: 'label', keypath: 'label', options: { unique: false } },
+        { name: 'description', keypath: 'description', options: { unique: false } },
+        { name: 'modelValue', keypath: 'modelValue', options: { unique: false } }
       ]
     }
   ]

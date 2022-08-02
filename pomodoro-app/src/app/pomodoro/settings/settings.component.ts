@@ -46,7 +46,15 @@ export class SettingsComponent implements OnInit {
 
   saveChanges() {
     console.log(this.formGroup.value);
-    this.backToPomodoro();
+    this.store.select('settings').subscribe(resp => {
+      let updated = [];
+      resp.timerModes.forEach(timer => {
+          const newMinuteValue = this.formGroup.value[timer.modelValue];
+          updated.push({...timer, timeInMins: newMinuteValue });
+      });
+      this.store.dispatch(new fromSettingsAction.UpdateAllSettingsAction(updated));
+      this.backToPomodoro();
+    });
   }
 
 }

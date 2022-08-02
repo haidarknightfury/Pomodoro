@@ -20,7 +20,7 @@ export class TimerService {
 
     getTimers(): TimerMode[] {
         let pomodoroTimers = [];
-        pomodoroTimers.push(new TimerMode(0.1, 'Pomodoro', true, 'Pomodoro Timer (in minutes)'));
+        pomodoroTimers.push(new TimerMode(5, 'Pomodoro', true, 'Pomodoro Timer (in minutes)'));
         pomodoroTimers.push(new TimerMode(10, 'Short break', false, 'Short break (in minutes)'));
         pomodoroTimers.push(new TimerMode(25, 'Long break', false, 'Long break (in minutes)'));
         return pomodoroTimers;
@@ -33,7 +33,7 @@ export class TimerService {
         })
     }
 
-    getTimer(): Observable<any> {
+    getAllTimers(): Observable<any[]> {
         return from(this.dbService.getAll(this.storeName));
     }
 
@@ -43,7 +43,14 @@ export class TimerService {
     }
 
     addTimer(timer: TimerMode): Observable<number> {
-        return from(this.dbService.add(this.storeName, timer));
+        const timerObj = {
+            timeInMins: timer.timeInMins,
+            active: timer.active,
+            label: timer.label,
+            description: timer.description,
+            modelValue: timer.modelValue
+        }
+        return from(this.dbService.add(this.storeName, timerObj));
     }
 
 

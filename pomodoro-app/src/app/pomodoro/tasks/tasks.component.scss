@@ -52,9 +52,10 @@
         color: black;
         font-weight: bold;
         justify-content: center;
-        border: 2px dotted darkgray;
         padding: 10px;
-        margin-top: 5px;
+        border-radius: 5px;
+        margin-top: 12px;
+        margin-bottom: 12px;
         &:hover {
             position: relative;
             left: 1px;

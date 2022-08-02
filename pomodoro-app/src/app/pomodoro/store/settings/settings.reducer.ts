@@ -10,12 +10,9 @@ const initialSettings: SettingState  = {
 
 export function settingsReducer(initialState = initialSettings, action: fromSettingsAction.SettingsAction): SettingState{
     switch(action.type) {
-        case fromSettingsAction.LOAD_SETTINGS:
-            let pomodoroTimers = [];
-            pomodoroTimers.push(new TimerMode(0.1, 'Pomodoro', true, 'Pomodoro Timer (in minutes)'));
-            pomodoroTimers.push(new TimerMode(10, 'Short break', false, 'Short break (in minutes)'));
-            pomodoroTimers.push(new TimerMode(25, 'Long break', false, 'Long break (in minutes)'));
-            return { timerModes: pomodoroTimers};
+        case fromSettingsAction.SETTINGS_LOADED:
+            console.log('settings has been loaded', action.payload);
+            return { timerModes: action.payload};
         case fromSettingsAction.UPDATE_SETTINGS:
             const currentSettingsIndex = initialState.timerModes.findIndex(i => i.label === action.payload.label);
             const newSettings = initialState.timerModes.splice(currentSettingsIndex, 1, action.payload);
