@@ -7,8 +7,8 @@
 
         <div class="time">{{ currentTime }}</div>
         <div class="start-stop">
-            <button class="form-button primary" *ngIf="!timer.hasStarted()" (click)="startTimer()"> Start</button>
-            <button class="form-button primary" *ngIf="timer.hasStarted()" (click)="timer.stop()">Stop</button>
+            <button class="form-button primary" *ngIf="timer && !timer.hasStarted()" (click)="startTimer()"> Start</button>
+            <button class="form-button primary" *ngIf="timer && timer.hasStarted()" (click)="timer.stop()">Stop</button>
         </div>
 
     </div>

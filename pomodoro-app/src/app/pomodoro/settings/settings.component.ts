@@ -22,14 +22,14 @@ export class SettingsComponent implements OnInit {
               private store: Store<{settings: SettingState}>) { }
 
   ngOnInit(): void {
-    this.settingOptions = this.timerService.getFormControls(this.timerService.getTimers());
-    this.formGroup = this.getFormGroup(this.settingOptions);
-    this.store.select('settings').subscribe(resp => {
-         console.info('getting settings from store');
-         console.table(resp);
-    });
-
     this.store.dispatch(new fromSettingsAction.LoadSettingsAction());
+
+    this.store.select('settings').subscribe(resp => {
+         if (resp.timerModes && resp.timerModes.length > 0) {
+          this.settingOptions = this.timerService.getFormControls([...resp.timerModes]);
+          this.formGroup = this.getFormGroup(this.settingOptions);
+         }
+    });
   }
 
   getFormGroup(options: any[]) {

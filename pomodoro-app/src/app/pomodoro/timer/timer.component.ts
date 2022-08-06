@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Timer } from '../../core/model/timer.model';
-import {TimerMode} from '../../core/model/timer-mode.model';
-import {TimerService} from '../../core/service/timer.service';
+import { TimerMode } from '../../core/model/timer-mode.model';
+import { TimerService } from '../../core/service/timer.service';
+import { Store } from '@ngrx/store';
+import { SettingState } from '../store/settings/settings.reducer';
+import { LoadSettingsAction } from '../store/settings/settings.action';
 
 
 @Component({
@@ -11,7 +14,7 @@ import {TimerService} from '../../core/service/timer.service';
 })
 export class TimerComponent implements OnInit {
 
-  constructor(private timerService:TimerService) { }
+  constructor(private timerService: TimerService, private store: Store<{ settings: SettingState }>) { }
 
   timer: Timer;
   currentTime: string = '';
@@ -21,15 +24,20 @@ export class TimerComponent implements OnInit {
   timerCompletedEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.initialiseTimerModes();
-    this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
-    this.currentTime = this.timer.getFormattedTime();
-    console.log(this.currentTime);
+    this.store.dispatch(new LoadSettingsAction());
+
+    this.store.select('settings').subscribe((resp) => {
+      if (resp && resp.timerModes && resp.timerModes.length > 0) {
+        this.pomodoroTimers = JSON.parse(JSON.stringify(resp.timerModes));
+        this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
+        this.currentTime = this.timer.getFormattedTime();
+      }
+    });
   }
 
   startTimer() {
     const completedCallback = () => this.timerCompleted();
-    const tickCallback = () => { 
+    const tickCallback = () => {
       this.currentTime = this.timer.getFormattedTime();
       console.log('current time is ', this.currentTime);
     };
@@ -43,11 +51,7 @@ export class TimerComponent implements OnInit {
   }
 
   timerCompleted() {
-      this.timerCompletedEvent.emit(this.timer);
-  }
-
-  initialiseTimerModes() {
-    this.pomodoroTimers = this.timerService.getTimers();
+    this.timerCompletedEvent.emit(this.timer);
   }
 
   setCurrentTimer(timer: TimerMode) {
@@ -61,11 +65,11 @@ export class TimerComponent implements OnInit {
     return this.pomodoroTimers.find(timer => timer.active);
   }
 
-  nextTimer(direction = 1){
+  nextTimer(direction = 1) {
     const activeIndex = this.pomodoroTimers.findIndex(timerVal => timerVal.active);
-    const nextActiveIndex = ((activeIndex + direction) < 0  ? (this.pomodoroTimers.length - Math.abs(activeIndex + direction)) : (activeIndex + direction)) % this.pomodoroTimers.length;
+    const nextActiveIndex = ((activeIndex + direction) < 0 ? (this.pomodoroTimers.length - Math.abs(activeIndex + direction)) : (activeIndex + direction)) % this.pomodoroTimers.length;
     this.pomodoroTimers.forEach(timerVal => timerVal.active = false);
-    this.pomodoroTimers.filter((_, index)=> index === nextActiveIndex).forEach(timerVal => timerVal.active = true);
+    this.pomodoroTimers.filter((_, index) => index === nextActiveIndex).forEach(timerVal => timerVal.active = true);
     this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
     this.currentTime = this.timer.getFormattedTime();
   }

@@ -27,8 +27,6 @@ export class PomodoroComponent implements OnInit {
       this.store.dispatch(new pomodoroAction.MarkTaskAsDone({activeTask: state.activeTask, index: activeTaskIndex}))
     });
     
-        // this.notifyTaskDone(task);
-        // this.store.dispatch(new taskOperations.MarkTaskAsDone());
   }
 
 
