@@ -39,7 +39,6 @@ export class TimerComponent implements OnInit {
     const completedCallback = () => this.timerCompleted();
     const tickCallback = () => {
       this.currentTime = this.timer.getFormattedTime();
-      console.log('current time is ', this.currentTime);
     };
 
     this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, tickCallback, completedCallback);
