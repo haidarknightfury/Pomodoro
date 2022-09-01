@@ -25,9 +25,17 @@ export abstract class AbstractTaskService implements ITaskService {
       
     }
 
+    private playAudio(): void {
+        const audio = new Audio();
+        audio.src = '../../assets/sounds/completed.wav';
+        audio.load();
+        audio.play();
+      }
+
     notifyTaskDone(task: Task) {
         const notificationMessage = `task with title ${task.title} and details : ${task.note} has been completed`;
         alert(notificationMessage);
+        this.playAudio();
     }
 }
 
