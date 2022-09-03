@@ -5,6 +5,8 @@ import { TimerService } from '../../core/service/timer.service';
 import { Store } from '@ngrx/store';
 import { SettingState } from '../store/settings/settings.reducer';
 import { LoadSettingsAction } from '../store/settings/settings.action';
+import { TaskState } from '../store/pomodoro/pomodor.reducer';
+import { Task } from 'src/app/core/model/task.model';
 
 
 @Component({
@@ -14,25 +16,39 @@ import { LoadSettingsAction } from '../store/settings/settings.action';
 })
 export class TimerComponent implements OnInit {
 
-  constructor(private timerService: TimerService, private store: Store<{ settings: SettingState }>) { }
+  constructor(private timerService: TimerService,
+    private settingsStore: Store<{ settings: SettingState }>,
+    private taskStore: Store<{ taskList: TaskState }>) { }
 
+  showStartBtn = true;
   timer: Timer;
   currentTime: string = '';
   pomodoroTimers: TimerMode[] = [];
+  activeTask: Task;
+
 
   @Output()
   timerCompletedEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadSettingsAction());
+    this.settingsStore.dispatch(new LoadSettingsAction());
 
-    this.store.select('settings').subscribe((resp) => {
+    this.settingsStore.select('settings').subscribe((resp) => {
       if (resp && resp.timerModes && resp.timerModes.length > 0) {
         this.pomodoroTimers = JSON.parse(JSON.stringify(resp.timerModes));
         this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
         this.currentTime = this.timer.getFormattedTime();
+
+        this.taskStore.select('taskList').subscribe(taskState => {
+          console.log('task state', taskState);
+          this.activeTask = taskState.activeTask;
+          this.showStartBtn = this.showStartButton();
+        });
       }
+
     });
+
+
   }
 
   startTimer() {
@@ -71,6 +87,12 @@ export class TimerComponent implements OnInit {
     this.pomodoroTimers.filter((_, index) => index === nextActiveIndex).forEach(timerVal => timerVal.active = true);
     this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
     this.currentTime = this.timer.getFormattedTime();
+    this.showStartBtn = this.showStartButton();
+  }
+
+  showStartButton() {
+    const activeTimer = this.getActiveTimer();
+    return ((activeTimer.label.toLowerCase() === 'pomodoro' && this.activeTask !== undefined) || activeTimer.label.toLowerCase() !== 'pomodoro')
   }
 
 }

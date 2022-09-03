@@ -27,7 +27,7 @@ export function TaskReducer(state: TaskState = initialTaskState, action: taskOpe
         case taskOperations.DELETE_TASK:
             const oldtasks = [...state.tasks];
             oldtasks.splice(action.payload, 1);
-            return { ...state, tasks: oldtasks, activeTask: state.tasks.find(task => !task.completed)}
+            return { ...state, tasks: oldtasks, activeTask: oldtasks.find(task => !task.completed)}
         case taskOperations.TASK_LOADED:
             return {...state, tasks: [...action.payload], activeTask: action.payload.find(task => !task.completed)}
         default:
