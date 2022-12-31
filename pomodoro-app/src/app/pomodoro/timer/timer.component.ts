@@ -38,17 +38,16 @@ export class TimerComponent implements OnInit {
         this.pomodoroTimers = JSON.parse(JSON.stringify(resp.timerModes));
         this.timer = new Timer(this.convertToMs(this.getActiveTimer().timeInMins), 1000, null);
         this.currentTime = this.timer.getFormattedTime();
-
-        this.taskStore.select('taskList').subscribe(taskState => {
-          console.log('task state', taskState);
-          this.activeTask = taskState.activeTask;
-          this.showStartBtn = this.showStartButton();
-        });
+        this.setupStartButton();
       }
-
     });
+  }
 
-
+  private setupStartButton() {
+    this.taskStore.select('taskList').subscribe(taskState => {
+      this.activeTask = taskState.activeTask;
+      this.showStartBtn = this.showStartButton();
+    });
   }
 
   startTimer() {
@@ -92,7 +91,8 @@ export class TimerComponent implements OnInit {
 
   showStartButton() {
     const activeTimer = this.getActiveTimer();
-    return ((activeTimer.label.toLowerCase() === 'pomodoro' && this.activeTask !== undefined) || activeTimer.label.toLowerCase() !== 'pomodoro')
+    const POMODORO_LABEL = 'pomodoro';
+    return ((activeTimer.label.toLowerCase() === POMODORO_LABEL && this.activeTask !== undefined) || activeTimer.label.toLowerCase() !== POMODORO_LABEL)
   }
 
 }
